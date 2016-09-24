@@ -33,6 +33,7 @@ If you find an issue, just open a ticket on it. Pull requests are warmly welcome
 - **Jerome Chan**
 	- GitHub: <https://github.com/jeromechan>
 	- Weibo: <http://weibo.com/5812529126>
+	- Blog: <http://aboutcoder.com>
 
 ## License
 
