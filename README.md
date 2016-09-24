@@ -1,11 +1,11 @@
-Packease-Utils, a very powerful and useful collection of utility functions written by Java.
+Packease-Utils
 ==================
 
-### About P.E-Utils
+## About P.E-Utils
 
-This is a repository to place lots of powerful functions written by Java. We hope you will like it as we do.
+P.E-Utils is a very powerful and useful collection of utility functions written by Java. We hope you will like it as we do.
 
-### Catalogs & Tutorials
+## Catalogs & Tutorials
 
 * [PE.utils.annotation](src/main/java/com/aboutcoder/packease/utils/annotation/)
 * [PE.utils.constants](src/main/java/com/aboutcoder/packease/utils/constants/)
@@ -19,3 +19,5 @@ This is a repository to place lots of powerful functions written by Java. We hop
 * [PE.utils.thread](src/main/java/com/aboutcoder/packease/utils/thread/)
 * [PE.utils.togglz](src/main/java/com/aboutcoder/packease/utils/togglz/)
 * [PE.utils.xml](src/main/java/com/aboutcoder/packease/utils/xml/)
+
+
