@@ -2,8 +2,10 @@ package com.aboutcoder.packease.utils.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <Description>
@@ -139,20 +141,68 @@ public class PEDateUtils {
      * firstDate = secondDate: 0
      * firstDate < secondDate: 正数
      *
-     * @param firstDate Date
+     * @param firstDate  Date
      * @param secondDate Date
      * @return Long
      */
-    public static Integer getBetweenDays(Date firstDate, Date secondDate) {
-        Calendar aCalendar = Calendar.getInstance();
+    public static Long getBetweenDays(Date firstDate, Date secondDate) {
+        if (firstDate == null || secondDate == null) {
+            return null;
+        }
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.clear();
+        calendarStart.setTime(firstDate);
+        int yearStart = calendarStart.get(Calendar.YEAR);
+        int monthStart = calendarStart.get(Calendar.MONTH);
+        int dayStart = calendarStart.get(Calendar.DAY_OF_MONTH);
+        calendarStart.clear();
+        calendarStart.set(yearStart, monthStart, dayStart);
 
-        aCalendar.setTime(firstDate);
-        int day1 = aCalendar.get(Calendar.DAY_OF_YEAR);
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.clear();
+        calendarEnd.setTime(secondDate);
+        int yearEnd = calendarEnd.get(Calendar.YEAR);
+        int monthEnd = calendarEnd.get(Calendar.MONTH);
+        int dayEnd = calendarEnd.get(Calendar.DAY_OF_MONTH);
+        calendarEnd.clear();
+        calendarEnd.set(yearEnd, monthEnd, dayEnd);
 
-        aCalendar.setTime(secondDate);
-        int day2 = aCalendar.get(Calendar.DAY_OF_YEAR);
 
-        return day2 - day1;
+        return (calendarEnd.getTimeInMillis() - calendarStart.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+    }
+
+    /**
+     * 获取两个日期之间的毫秒数 (精确到ms)
+     * firstDate > secondDate: 负数
+     * firstDate = secondDate: 0
+     * firstDate < secondDate: 正数
+     *
+     * @param firstDate  Date
+     * @param secondDate Date
+     * @return Long
+     */
+    public static Long getBetweenMilliseconds(Date firstDate, Date secondDate) {
+        if (firstDate == null || secondDate == null) {
+            return null;
+        }
+        return secondDate.getTime() - firstDate.getTime();
+    }
+
+    /**
+     * 获取两个日期之间的分钟数 (精确到min)
+     * firstDate > secondDate: 负数
+     * firstDate = secondDate: 0
+     * firstDate < secondDate: 正数
+     *
+     * @param firstDate  Date
+     * @param secondDate Date
+     * @return Long
+     */
+    public static Long getBetweenMinutes(Date firstDate, Date secondDate) {
+        if (firstDate == null || secondDate == null) {
+            return null;
+        }
+        return (secondDate.getTime() - firstDate.getTime()) / (60 * 1000);
     }
 
     /**
@@ -196,7 +246,7 @@ public class PEDateUtils {
     /**
      * Adds a number of days to a date returning a new object. The original date object is unchanged.
      *
-     * @param date the date, not null
+     * @param date   the date, not null
      * @param amount the amount to add, may be negative
      * @return the new date object with the amount added
      */
@@ -213,7 +263,7 @@ public class PEDateUtils {
     /**
      * Adds a number of months to a date returning a new object. The original date object is unchanged.
      *
-     * @param date the date, not null
+     * @param date   the date, not null
      * @param amount the amount to add, may be negative
      * @return the new date object with the amount added
      */
@@ -227,7 +277,7 @@ public class PEDateUtils {
     /**
      * Adds a number of hours to a date returning a new object. The original date object is unchanged.
      *
-     * @param date the date, not null
+     * @param date   the date, not null
      * @param amount the amount to add, may be negative
      * @return the new date object with the amount added
      */
@@ -236,5 +286,649 @@ public class PEDateUtils {
         cal.setTime(date);
         cal.add(Calendar.HOUR_OF_DAY, amount);
         return cal.getTime();
+    }
+
+    /**
+     * Adds to a date returning a new object. The original date object is unchanged.
+     *
+     * @param date the date, not null
+     * @param calendarField the calendar field to add to
+     * @param amount the amount to add, may be negative
+     * @return the new date object with the amount added
+     */
+    public static Date addCustomField(Date date, int calendarField, int amount) {
+        if (date == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(calendarField, amount);
+        return c.getTime();
+    }
+
+    /**
+     * 获取指定日期的当前月第一天
+     *
+     * @author chenjinlong 20160824
+     * @param year
+     * @param month
+     * @return
+     */
+    public static String getFirstDateStringOfMonth(Integer year, Integer month) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMinimum(Calendar.MILLISECOND));
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        return formatDate(calendar.getTime());
+    }
+
+    /**
+     * 获取指定日期的当前月最后一天
+     *
+     * @author chenjinlong 20160824
+     * @param year
+     * @param month
+     * @return
+     */
+    public static String getLastDateStringOfMonth(Integer year, Integer month) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.MONTH, 1);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        return formatDate(calendar.getTime());
+    }
+
+    /**
+     * 获取指定日期的当前月第一天
+     *
+     * @author chenjinlong 20160824
+     * @param year
+     * @param month
+     * @return
+     */
+    public static Date getFirstDateOfMonth(Integer year, Integer month) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMinimum(Calendar.MILLISECOND));
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取指定日期的当前月最后一天
+     *
+     * @author chenjinlong 20160824
+     * @param year
+     * @param month
+     * @return
+     */
+    public static Date getLastDateOfMonth(Integer year, Integer month) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.MONTH, 1);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取指定日期的月份
+     *
+     * @author chenjinlong 20160825
+     * @param srcDate
+     * @return
+     */
+    public static Integer getMonthNumberFromDate(Date srcDate) {
+        if (null == srcDate) {
+            return 0;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(srcDate);
+        return calendar.get(Calendar.MONTH) + 1;
+    }
+
+    /**
+     * 获取指定日期的年份
+     *
+     * @author chenjinlong 20160825
+     * @param srcDate
+     * @return
+     */
+    public static Integer getYearNumberFromDate(Date srcDate) {
+        if (null == srcDate) {
+            return 0;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(srcDate);
+        return calendar.get(Calendar.YEAR);
+    }
+
+    /**
+     * 返回指定日期的季度
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static int getQuarterOfYear(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.MONTH) / 3 + 1;
+    }
+
+    /**
+     * 获取指定日期所在周的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getFirstDayOfWeek(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取指定日期所在周的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getLastDayOfWeek(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek() + 6); // Saturday
+        return calendar.getTime();
+    }
+
+    /**
+     * 取得当前日期所在周的前(-)/后(+)amount周第一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @param amount
+     * @return
+     */
+    public static Date getFirstDayOfAmountWeek(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return getFirstDayOfWeek(calendar.get(Calendar.YEAR), calendar.get(Calendar.WEEK_OF_YEAR) + amount);
+    }
+
+    /**
+     * 取得当前日期所在周的前(-)/后(+)amount周最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @param amount
+     * @return
+     */
+    public static Date getLastDayOfAmountWeek(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return getLastDayOfWeek(calendar.get(Calendar.YEAR), calendar.get(Calendar.WEEK_OF_YEAR) + amount);
+    }
+
+    /**
+     * 得到某年某周的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param year
+     * @param week
+     * @return
+     */
+    public static Date getFirstDayOfWeek(int year, int week) {
+        week = week - 1;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, Calendar.JANUARY);
+        calendar.set(Calendar.DATE, 1);
+        Calendar cal = (Calendar) calendar.clone();
+        cal.add(Calendar.DATE, week * 7);
+        return getFirstDayOfWeek(cal.getTime());
+    }
+
+    /**
+     * 获取某年某周的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param year
+     * @param week
+     * @return
+     */
+    public static Date getLastDayOfWeek(int year, int week) {
+        week = week - 1;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, Calendar.JANUARY);
+        calendar.set(Calendar.DATE, 1);
+        Calendar cal = (Calendar) calendar.clone();
+        cal.add(Calendar.DATE, week * 7);
+        return getLastDayOfWeek(cal.getTime());
+    }
+
+    /**
+     * 返回指定日期的月的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getFirstDayOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 返回指定日期的月的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getLastDayOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
+        calendar.roll(Calendar.DATE, -1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 返回指定日期的前(-)/后(+)amount月的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getFirstDayOfAmountMonth(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + amount, 1);
+        calendar.roll(Calendar.DATE, -1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 返回指定日期的前(-)/后(+)amount月的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getLastDayOfAmountMonth(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + amount, 1);
+        calendar.roll(Calendar.DATE, -1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 返回指定日期的季的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getFirstDayOfQuarter(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return getFirstDayOfQuarter(calendar.get(Calendar.YEAR), getQuarterOfYear(date));
+    }
+
+    /**
+     * 返回指定日期的季的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getLastDayOfQuarter(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return getLastDayOfQuarter(calendar.get(Calendar.YEAR), getQuarterOfYear(date));
+    }
+
+    /**
+     * 返回指定日期的前(-)/后(+)amount季的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @param amount
+     * @return
+     */
+    public static Date getFirstDayOfAmountQuarter(Date date, int amount) {
+        Date firstDayOfCurrentQuarter = getFirstDayOfQuarter(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(firstDayOfCurrentQuarter);
+
+        calendar.add(Calendar.MONTH, amount * 3 + 1);
+        return getFirstDayOfQuarter(calendar.getTime());
+    }
+
+    /**
+     * 返回指定日期的前(-)/后(+)amount季的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @param amount
+     * @return
+     */
+    public static Date getLastDayOfAmountQuarter(Date date, int amount) {
+        Date firstDayOfCurrentQuarter = getFirstDayOfQuarter(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(firstDayOfCurrentQuarter);
+
+        calendar.add(Calendar.MONTH, amount * 3 + 1);
+        return getLastDayOfQuarter(calendar.getTime());
+    }
+
+    /**
+     * 返回指定年季的季的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param year
+     * @param quarter
+     * @return
+     */
+    public static Date getFirstDayOfQuarter(Integer year, Integer quarter) {
+        Calendar calendar = Calendar.getInstance();
+        Integer month = 0;
+        if (quarter == 1) {
+            month = 1 - 1;
+        } else if (quarter == 2) {
+            month = 4 - 1;
+        } else if (quarter == 3) {
+            month = 7 - 1;
+        } else if (quarter == 4) {
+            month = 10 - 1;
+        } else {
+            month = calendar.get(Calendar.MONTH);
+        }
+        return getFirstDayOfMonth(year, month);
+    }
+
+    /**
+     * 返回指定年月的月的第一天
+     *
+     * @author chenjinlong 20161025
+     * @param year
+     * @param month
+     * @return
+     */
+    public static Date getFirstDayOfMonth(Integer year, Integer month) {
+        Calendar calendar = Calendar.getInstance();
+        if (year == null) {
+            year = calendar.get(Calendar.YEAR);
+        }
+        if (month == null) {
+            month = calendar.get(Calendar.MONTH);
+        }
+        calendar.set(year, month, 1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 返回指定年季的季的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param year
+     * @param quarter
+     * @return
+     */
+    public static Date getLastDayOfQuarter(Integer year, Integer quarter) {
+        Calendar calendar = Calendar.getInstance();
+        Integer month = 0;
+        if (quarter == 1) {
+            month = 3 - 1;
+        } else if (quarter == 2) {
+            month = 6 - 1;
+        } else if (quarter == 3) {
+            month = 9 - 1;
+        } else if (quarter == 4) {
+            month = 12 - 1;
+        } else {
+            month = calendar.get(Calendar.MONTH);
+        }
+        return getLastDayOfMonth(year, month);
+    }
+
+    /**
+     * 返回指定年月的月的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param year
+     * @param month
+     * @return
+     */
+    public static Date getLastDayOfMonth(Integer year, Integer month) {
+        Calendar calendar = Calendar.getInstance();
+        if (year == null) {
+            year = calendar.get(Calendar.YEAR);
+        }
+        if (month == null) {
+            month = calendar.get(Calendar.MONTH);
+        }
+        calendar.set(year, month, 1);
+        calendar.roll(Calendar.DATE, -1);
+        return calendar.getTime();
+    }
+
+    /**
+     * 返回指定日期的上一季的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param date
+     * @return
+     */
+    public static Date getLastDayOfLastQuarter(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return getLastDayOfLastQuarter(calendar.get(Calendar.YEAR), getQuarterOfYear(date));
+    }
+
+    /**
+     * 返回指定年季的上一季的最后一天
+     *
+     * @author chenjinlong 20161025
+     * @param year
+     * @param quarter
+     * @return
+     */
+    public static Date getLastDayOfLastQuarter(Integer year, Integer quarter) {
+        Calendar calendar = Calendar.getInstance();
+        Integer month = 0;
+        if (quarter == 1) {
+            month = 12 - 1;
+        } else if (quarter == 2) {
+            month = 3 - 1;
+        } else if (quarter == 3) {
+            month = 6 - 1;
+        } else if (quarter == 4) {
+            month = 9 - 1;
+        } else {
+            month = calendar.get(Calendar.MONTH);
+        }
+        return getLastDayOfMonth(year, month);
+    }
+
+    /**
+     * 根据beginDate和endDate,离散出各个日期
+     *
+     * @author chenjinlong 20161025
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    public static List<Date> generateMultiDateList(Date beginDate, Date endDate) {
+        List<Date> resultList = new ArrayList<Date>();
+        if (isSameDay(beginDate, endDate)) {
+            resultList.add(beginDate);
+            return resultList;
+        }
+        if (getBetweenDays(beginDate, endDate) < 0) {
+            return resultList;
+        }
+        while (getBetweenDays(beginDate, endDate) >= 0) {
+            resultList.add(beginDate);
+            beginDate = addDays(beginDate, 1);
+        }
+        return resultList;
+    }
+
+    /**
+     * 根据beginDate和endDate,离散出各个星期
+     *
+     * @author chenjinlong 20161025
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    public static List<PEDateScope> generateDateScopeListAsWeek(Date beginDate, Date endDate) {
+        List<PEDateScope> resultList = new ArrayList<PEDateScope>();
+        if (isSameDay(beginDate, endDate)) {
+            Date firstDayOfWeek = getFirstDayOfWeek(beginDate);
+            Date lastDayOfWeek = getLastDayOfWeek(endDate);
+            resultList.add(new PEDateScope(firstDayOfWeek, lastDayOfWeek));
+            return resultList;
+        }
+        if (getBetweenDays(beginDate, endDate) < 0) {
+            return resultList;
+        }
+
+        // 此处用于确保星期的完整性
+        beginDate = getFirstDayOfWeek(beginDate);
+        endDate = getLastDayOfWeek(endDate);
+
+        while (getBetweenDays(beginDate, endDate) >= 0) {
+            Date tmpEndDate = addDays(beginDate, 6);
+
+            resultList.add(new PEDateScope(beginDate, tmpEndDate));
+
+            beginDate = addDays(beginDate, 7);
+        }
+        return resultList;
+    }
+
+    /**
+     * 根据beginDate和endDate,离散出各个月
+     *
+     * @author chenjinlong 20161025
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    public static List<PEDateScope> generateDateScopeListAsMonth(Date beginDate, Date endDate) {
+        List<PEDateScope> resultList = new ArrayList<PEDateScope>();
+        if (isSameDay(beginDate, endDate)) {
+            Date firstDayOfMonth = getFirstDayOfMonth(beginDate);
+            Date lastDayOfMonth = getLastDayOfMonth(endDate);
+            resultList.add(new PEDateScope(firstDayOfMonth, lastDayOfMonth));
+            return resultList;
+        }
+        if (getBetweenDays(beginDate, endDate) < 0) {
+            return resultList;
+        }
+
+        // 此处用于确保月份的完整性
+        beginDate = getFirstDayOfMonth(beginDate);
+        endDate = getLastDayOfMonth(endDate);
+
+        while (getBetweenDays(beginDate, endDate) >= 0) {
+            Date tmpEndDate = getLastDayOfMonth(beginDate);
+
+            resultList.add(new PEDateScope(beginDate, tmpEndDate));
+
+            beginDate = getFirstDayOfAmountMonth(beginDate, 1);
+        }
+        return resultList;
+    }
+
+    /**
+     * 根据beginDate和endDate,离散出各个季度
+     *
+     * @author chenjinlong 20161025
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    public static List<PEDateScope> generateDateScopeListAsQuarter(Date beginDate, Date endDate) {
+        List<PEDateScope> resultList = new ArrayList<PEDateScope>();
+        if (isSameDay(beginDate, endDate)) {
+            Date firstDayOfQuarter = getFirstDayOfQuarter(beginDate);
+            Date lastDayOfQuarter = getLastDayOfQuarter(endDate);
+            resultList.add(new PEDateScope(firstDayOfQuarter, lastDayOfQuarter));
+            return resultList;
+        }
+        if (getBetweenDays(beginDate, endDate) < 0) {
+            return resultList;
+        }
+
+        // 此处用于确保月份的完整性
+        beginDate = getFirstDayOfQuarter(beginDate);
+        endDate = getLastDayOfQuarter(endDate);
+
+        while (getBetweenDays(beginDate, endDate) >= 0) {
+            Date tmpEndDate = getLastDayOfQuarter(beginDate);
+
+            resultList.add(new PEDateScope(beginDate, tmpEndDate));
+
+            beginDate = getFirstDayOfAmountQuarter(beginDate, 1);
+        }
+        return resultList;
+    }
+
+    /**
+     * 校验指定日期checkDate是否在dateScope范围内
+     *
+     * @author chenjinlong 20161026
+     * @param checkDate
+     * @param PEDateScope
+     * @return
+     */
+    public static boolean checkDateExistInScope(Date checkDate, PEDateScope PEDateScope) {
+        if (null == checkDate
+                || null == PEDateScope
+                || (null == PEDateScope.getBeginDate() && null == PEDateScope.getEndDate())) {
+            return false;
+        }
+        if (null != PEDateScope.getBeginDate() && null == PEDateScope.getEndDate()) {
+            return getBetweenDays(PEDateScope.getBeginDate(), checkDate) >= 0;
+        }
+
+        if (null == PEDateScope.getBeginDate() && null != PEDateScope.getEndDate()) {
+            return getBetweenDays(checkDate, PEDateScope.getEndDate()) >= 0;
+        }
+
+        return getBetweenDays(PEDateScope.getBeginDate(), checkDate) >= 0
+                && getBetweenDays(checkDate, PEDateScope.getEndDate()) >= 0;
     }
 }

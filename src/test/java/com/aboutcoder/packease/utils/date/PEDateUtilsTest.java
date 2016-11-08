@@ -96,9 +96,9 @@ public class PEDateUtilsTest {
         Calendar calendarSecond = Calendar.getInstance();
         calendarSecond.set(2016, 1, 10, 0, 0, 0);
 
-        int daysGtZero = PEDateUtils.getBetweenDays(calendarFirst.getTime(), calendarSecond.getTime());
+        long daysGtZero = PEDateUtils.getBetweenDays(calendarFirst.getTime(), calendarSecond.getTime());
         Assert.assertTrue(daysGtZero > 0 && daysGtZero == 9);
-        int daysLtZero = PEDateUtils.getBetweenDays(calendarSecond.getTime(), calendarFirst.getTime());
+        long daysLtZero = PEDateUtils.getBetweenDays(calendarSecond.getTime(), calendarFirst.getTime());
         Assert.assertTrue(daysLtZero < 0 && daysLtZero == -9);
     }
 
