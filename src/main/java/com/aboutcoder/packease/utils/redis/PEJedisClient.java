@@ -1,6 +1,3 @@
-/**************************************************************************************** 
-        途牛科技有限公司
- ****************************************************************************************/
 package com.aboutcoder.packease.utils.redis;
 
 import com.aboutcoder.packease.utils.string.PESerializationUtils;
