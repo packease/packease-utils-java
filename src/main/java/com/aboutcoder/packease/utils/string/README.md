@@ -5,6 +5,8 @@ PE.utils.string
 
 * PEStringUtils: 提供常见字符串操作静态函数
 
+* PESerializationUtils: 提供对象或字符串的序列化/反序列化工具函数
+
 * PEBase64Utils: 提供Base64编解码的静态操作函数
 
 ```java
