@@ -15,6 +15,7 @@ P.E-Utils is a very powerful and useful collection of utility functions written 
 * [PE.utils.io](src/main/java/com/aboutcoder/packease/utils/io/)
 * [PE.utils.jms](src/main/java/com/aboutcoder/packease/utils/jms/)
 * [PE.utils.json](src/main/java/com/aboutcoder/packease/utils/json/)
+* [PE.utils.redis](src/main/java/com/aboutcoder/packease/utils/redis/)
 * [PE.utils.string](src/main/java/com/aboutcoder/packease/utils/string/)
 * [PE.utils.thread](src/main/java/com/aboutcoder/packease/utils/thread/)
 * [PE.utils.togglz](src/main/java/com/aboutcoder/packease/utils/togglz/)
