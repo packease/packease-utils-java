@@ -34,7 +34,7 @@ public class PEJedisClient {
      */
     public void disconnect() {
         if (null != shardedJedisResource) {
-            shardedJedisResource.disconnect();
+            redisDataSource.returnResource(shardedJedisResource);
         }
     }
 
@@ -43,13 +43,9 @@ public class PEJedisClient {
      *
      * @return
      */
-    public synchronized ShardedJedis getShardedJedisResource() {
-        if (null == shardedJedisResource) {
-            this.shardedJedisResource = redisDataSource.getRedisClient();
-            return this.shardedJedisResource;
-        } else {
-            return this.shardedJedisResource;
-        }
+    public ShardedJedis getShardedJedisResource() {
+        this.shardedJedisResource = redisDataSource.getRedisClient();
+        return this.shardedJedisResource;
     }
 
     /**
