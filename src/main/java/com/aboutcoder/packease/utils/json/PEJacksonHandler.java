@@ -2,6 +2,7 @@ package com.aboutcoder.packease.utils.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -28,7 +29,9 @@ public class PEJacksonHandler {
      */
     public static ObjectMapper getObjectMapper() {
         if (null == objectMapper) {
-            return new ObjectMapper();
+            objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            return objectMapper;
         } else {
             return objectMapper;
         }
