@@ -27,12 +27,10 @@ public class PEJedisClient {
     @Autowired
     private PEJedisDataSource redisDataSource;
 
-    private ShardedJedis shardedJedisResource;
-
     /**
      * Disconnect redis datasource
      */
-    public void disconnect() {
+    public void disconnect(ShardedJedis shardedJedisResource) {
         if (null != shardedJedisResource) {
             redisDataSource.returnResource(shardedJedisResource);
         }
@@ -44,8 +42,7 @@ public class PEJedisClient {
      * @return
      */
     public ShardedJedis getShardedJedisResource() {
-        this.shardedJedisResource = redisDataSource.getRedisClient();
-        return this.shardedJedisResource;
+        return redisDataSource.getRedisClient();
     }
 
     /**
@@ -55,9 +52,10 @@ public class PEJedisClient {
      */
     public void del(String key) {
         byte[] keyBytes = PESerializationUtils.stringSerialize(key);
-        getShardedJedisResource().del(keyBytes);
+        ShardedJedis shardedJedisResource = getShardedJedisResource();
+        shardedJedisResource.del(keyBytes);
         logger.info("delete redis key:{} ", key);
-        disconnect();
+        disconnect(shardedJedisResource);
     }
 
     /**
@@ -72,8 +70,9 @@ public class PEJedisClient {
         byte[] valueBytes = PESerializationUtils.serialize(object);
         if (null != valueBytes) {
             byte[] keyBytes = PESerializationUtils.stringSerialize(key);
-            getShardedJedisResource().setex(keyBytes, expireTime, valueBytes);
-            disconnect();
+            ShardedJedis shardedJedisResource = getShardedJedisResource();
+            shardedJedisResource.setex(keyBytes, expireTime, valueBytes);
+            disconnect(shardedJedisResource);
         }
     }
 
@@ -84,9 +83,10 @@ public class PEJedisClient {
      * @param <T>
      */
     public <T extends Serializable> T getSerializableValue(final String key, Class<T> clazz) {
+        ShardedJedis shardedJedisResource = getShardedJedisResource();
         byte[] keyBytes = PESerializationUtils.stringSerialize(key);
-        byte[] value = getShardedJedisResource().get(keyBytes);
-        disconnect();
+        byte[] value = shardedJedisResource.get(keyBytes);
+        disconnect(shardedJedisResource);
         if (null != value) {
             return clazz.cast(PESerializationUtils.deserialize(value));
         } else {
@@ -107,8 +107,9 @@ public class PEJedisClient {
         byte[] valueBytes = PESerializationUtils.serialize(baseRedisListVo);
         if (null != valueBytes) {
             byte[] keyBytes = PESerializationUtils.stringSerialize(key);
-            getShardedJedisResource().setex(keyBytes, expireTime, valueBytes);
-            disconnect();
+            ShardedJedis shardedJedisResource = getShardedJedisResource();
+            shardedJedisResource.setex(keyBytes, expireTime, valueBytes);
+            disconnect(shardedJedisResource);
         }
     }
 
@@ -120,9 +121,10 @@ public class PEJedisClient {
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public <T extends Serializable> List<T> getSerializableList(final String key) {
+        ShardedJedis shardedJedisResource = getShardedJedisResource();
         byte[] keyBytes = PESerializationUtils.stringSerialize(key);
-        byte[] valueBytes = getShardedJedisResource().get(keyBytes);
-        disconnect();
+        byte[] valueBytes = shardedJedisResource.get(keyBytes);
+        disconnect(shardedJedisResource);
         try {
             if (null == valueBytes) {
                 return null;
@@ -152,8 +154,9 @@ public class PEJedisClient {
         byte[] valueBytes = PESerializationUtils.serialize(baseRedisMapVo);
         if (null != valueBytes) {
             byte[] keyBytes = PESerializationUtils.stringSerialize(key);
-            getShardedJedisResource().setex(keyBytes, expireTime, valueBytes);
-            disconnect();
+            ShardedJedis shardedJedisResource = getShardedJedisResource();
+            shardedJedisResource.setex(keyBytes, expireTime, valueBytes);
+            disconnect(shardedJedisResource);
         }
     }
 
@@ -165,9 +168,10 @@ public class PEJedisClient {
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public <K, V extends Serializable> Map<K, V> getSerializableMap(final String key) {
+        ShardedJedis shardedJedisResource = getShardedJedisResource();
         byte[] keyBytes = PESerializationUtils.stringSerialize(key);
-        byte[] valueBytes = getShardedJedisResource().get(keyBytes);
-        disconnect();
+        byte[] valueBytes = shardedJedisResource.get(keyBytes);
+        disconnect(shardedJedisResource);
         try {
             if (null == valueBytes) {
                 return null;
