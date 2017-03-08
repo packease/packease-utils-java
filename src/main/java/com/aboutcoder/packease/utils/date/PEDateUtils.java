@@ -931,4 +931,44 @@ public class PEDateUtils {
         return getBetweenDays(PEDateScope.getBeginDate(), checkDate) >= 0
                 && getBetweenDays(checkDate, PEDateScope.getEndDate()) >= 0;
     }
+
+    /**
+     * 获取指定年月范围内的dateItem集合
+     *
+     * @author jeromechan 20170308
+     * @param yearBegin
+     * @param monthBegin
+     * @param yearEnd
+     * @param monthEnd
+     * @return
+     */
+    public static List<PEDateItem> generateDateItemListAsMonth(short yearBegin, byte monthBegin,
+                                                             short yearEnd, byte monthEnd) {
+        if (yearEnd < yearBegin || (yearBegin == yearEnd && monthBegin > monthEnd)) {
+            return null;
+        }
+
+        List<PEDateItem> resultList = new ArrayList<PEDateItem>();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.YEAR, yearBegin);
+        calendar.set(Calendar.MONTH, monthBegin - 1);
+
+        // loop of year field.
+        while (calendar.get(Calendar.YEAR) < yearEnd) {
+            resultList.add(new PEDateItem((short)calendar.get(Calendar.YEAR),
+                    (byte)(calendar.get(Calendar.MONTH) + 1)));
+            calendar.add(Calendar.MONTH, 1);
+        }
+
+        // loop of month field when year equals each other.
+        while (calendar.get(Calendar.YEAR) == yearEnd && calendar.get(Calendar.MONTH) < monthEnd) {
+            resultList.add(new PEDateItem((short)calendar.get(Calendar.YEAR),
+                    (byte)(calendar.get(Calendar.MONTH) + 1)));
+            calendar.add(Calendar.MONTH, 1);
+        }
+
+        return resultList;
+    }
 }
