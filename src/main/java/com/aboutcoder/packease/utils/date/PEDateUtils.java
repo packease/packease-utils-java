@@ -571,8 +571,6 @@ public class PEDateUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + amount, 1);
-        calendar.roll(Calendar.DATE, -1);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
         return calendar.getTime();
     }
 
@@ -737,7 +735,7 @@ public class PEDateUtils {
         if (month == null) {
             month = calendar.get(Calendar.MONTH);
         }
-        calendar.set(year, month, 1);
+        calendar.set(year, month - 1, 1);
         calendar.roll(Calendar.DATE, -1);
         return calendar.getTime();
     }
