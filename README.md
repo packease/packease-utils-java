@@ -1,6 +1,8 @@
 Packease-Utils
 ==================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a356c3a08474a18966c221acd1bafaf)](https://www.codacy.com/app/jerome.chan369/packease-utils-java?utm_source=github.com&utm_medium=referral&utm_content=packease/packease-utils-java&utm_campaign=badger)
+
 ## About P.E-Utils
 
 P.E-Utils is a very powerful and useful collection of utility functions written by Java. We hope you will like it as we do.
