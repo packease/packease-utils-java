@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aboutcoder.packease.utils.thread.PEAsyncProxyTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-05-25T10:37:47" hostname="Jeromes-MacBook-Pro.local" time="0.008">
+  <properties/>
+  <testcase name="testPEAsyncProxy" classname="com.aboutcoder.packease.utils.thread.PEAsyncProxyTest" time="0.008"/>
+  <system-out><![CDATA[Executing in a new thread.........
+Invoking successfully.
+Executing in a new thread.........
+Invoking fail.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

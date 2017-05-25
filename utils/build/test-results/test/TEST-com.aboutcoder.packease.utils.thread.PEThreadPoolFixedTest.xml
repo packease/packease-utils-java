@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aboutcoder.packease.utils.thread.PEThreadPoolFixedTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-05-25T10:37:47" hostname="Jeromes-MacBook-Pro.local" time="91.09">
+  <properties/>
+  <testcase name="testThreadCallbackViaGuavaFuture" classname="com.aboutcoder.packease.utils.thread.PEThreadPoolFixedTest" time="1.064"/>
+  <testcase name="testThreadCallbackViaFutureAndCallable" classname="com.aboutcoder.packease.utils.thread.PEThreadPoolFixedTest" time="5.008"/>
+  <testcase name="testThreadCallbackViaFutureTaskAndCallable" classname="com.aboutcoder.packease.utils.thread.PEThreadPoolFixedTest" time="5.006"/>
+  <testcase name="testThreadRejectedHandler" classname="com.aboutcoder.packease.utils.thread.PEThreadPoolFixedTest" time="80.011"/>
+  <system-out><![CDATA[Thread is running and calculating...#-----pool-1-thread-1
+Thread is running and calculating...#-----pool-1-thread-2
+main thread is running.
+Thread is running and calculating...#-----pool-2-thread-1
+main thread is running.
+calculating:-----1
+calculating:-----1
+calculating:-----2
+calculating:-----3
+calculating:-----2
+calculating:-----3
+To get the response of sub thread:-----onSuccess
+calculating:-----1
+calculating:-----2
+calculating:-----3
+To get the response of sub thread:-----3
+Thread is running and calculating...#-----pool-3-thread-1
+main thread is running.
+calculating:-----1
+calculating:-----2
+calculating:-----3
+To get the response of sub thread:-----3
+=================== Been added task 1
+线程池中线程数目：1，队列中等待执行的任务数目：0，已执行玩别的任务数目：0
+Thread is running and calculating...#70000#-----pool-4-thread-1
+===================
+=================== Been added task 2
+线程池中线程数目：1，队列中等待执行的任务数目：1，已执行玩别的任务数目：0
+===================
+=================== Been added task 3
+线程池中线程数目：1，队列中等待执行的任务数目：2，已执行玩别的任务数目：0
+===================
+Thread is running and calculating...#40000#-----Test worker
+=================== Been added task 4
+线程池中线程数目：1，队列中等待执行的任务数目：2，已执行玩别的任务数目：0
+===================
+Thread is running and calculating...#30000#-----Test worker
+=================== Been added task 5
+Thread is running and calculating...#60000#-----pool-4-thread-1
+线程池中线程数目：1，队列中等待执行的任务数目：1，已执行玩别的任务数目：1
+===================
+=================== Been added task 6
+线程池中线程数目：1，队列中等待执行的任务数目：2，已执行玩别的任务数目：1
+===================
+Thread is running and calculating...#10000#-----Test worker
+=================== Been added task 7
+线程池中线程数目：1，队列中等待执行的任务数目：2，已执行玩别的任务数目：1
+===================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-05-25T10:37:44" hostname="Jeromes-MacBook-Pro.local" time="0.131">
+  <properties/>
+  <testcase name="testReadPropertiesWithTypeRef[0]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.089"/>
+  <testcase name="testReadPropertiesWithConfig[0]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.011"/>
+  <testcase name="testReadPropertiesWithClassType[0]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.004"/>
+  <testcase name="testReadPropertiesWithDefault[0]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.002"/>
+  <testcase name="testReadPropertiesWithTypeRef[1]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.002"/>
+  <testcase name="testReadPropertiesWithConfig[1]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.006"/>
+  <testcase name="testReadPropertiesWithClassType[1]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.006"/>
+  <testcase name="testReadPropertiesWithDefault[1]" classname="com.aboutcoder.packease.utils.json.PEJsonPathHandlerTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+</testsuite>

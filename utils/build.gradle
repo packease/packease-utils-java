@@ -1,0 +1,49 @@
+group 'com.aboutcoder.packease.utils'
+version '1.0.0'
+
+apply plugin: 'java'
+
+dependencies {
+    compile rootProject.ext.dependencies['slf4j']
+    compile rootProject.ext.dependencies['spring-context']
+    compile rootProject.ext.dependencies['spring-jdbc']
+    compile rootProject.ext.dependencies['spring-aspects']
+    compile rootProject.ext.dependencies['spring-jms']
+    compile rootProject.ext.dependencies['guava']
+    compile rootProject.ext.dependencies['fastjson']
+    compile rootProject.ext.dependencies['druid']
+    compile rootProject.ext.dependencies['jackson-core']
+    compile rootProject.ext.dependencies['jackson-databind']
+    compile rootProject.ext.dependencies['jackson-annotations']
+    compile rootProject.ext.dependencies['staxon']
+    compile rootProject.ext.dependencies['commons-lang']
+    compile rootProject.ext.dependencies['commons-codec']
+    compile rootProject.ext.dependencies['togglz-core']
+    compile rootProject.ext.dependencies['poi']
+    compile rootProject.ext.dependencies['poi-ooxml']
+    compile rootProject.ext.dependencies['servlet-api']
+    compile rootProject.ext.dependencies['json-path']
+    compile (rootProject.ext.dependencies['activemq']) {
+        exclude module: 'kahadb'
+        exclude module: 'activemq-camel'
+        exclude module: 'activemq-console'
+        exclude module: 'activemq-optional'
+        exclude group: 'org.apache.geronimo.specs', module:'geronimo-annotation_1.0_spec'
+    }
+    compile rootProject.ext.dependencies['jedis']
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile rootProject.ext.dependencies['junit']
+}
+
+test {
+    useJUnit()
+    filter {
+        //include all tests from test suites
+        includeTestsMatching "*Suite"
+    }
+    testLogging {
+        // Show that tests are run in the command-line output
+        events 'started', 'passed'
+    }
+    reports.html.enabled = false
+}
