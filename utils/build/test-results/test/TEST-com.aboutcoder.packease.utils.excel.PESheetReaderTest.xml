@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.aboutcoder.packease.utils.excel.PESheetReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-05-25T10:37:39" hostname="Jeromes-MacBook-Pro.local" time="0.994">
-  <properties/>
-  <testcase name="testReadSingleSheetViaFilePath" classname="com.aboutcoder.packease.utils.excel.PESheetReaderTest" time="0.994"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

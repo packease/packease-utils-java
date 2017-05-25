@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.aboutcoder.packease.utils.string.PEMd5UtilsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-05-25T10:37:44" hostname="Jeromes-MacBook-Pro.local" time="0.002">
-  <properties/>
-  <testcase name="testGenerateMd5" classname="com.aboutcoder.packease.utils.string.PEMd5UtilsTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

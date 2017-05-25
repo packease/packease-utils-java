@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.aboutcoder.packease.utils.io.PEInputStreamUtilsTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-05-25T10:37:40" hostname="Jeromes-MacBook-Pro.local" time="3.114">
-  <properties/>
-  <testcase name="testGetHttpResourceAsInputStream" classname="com.aboutcoder.packease.utils.io.PEInputStreamUtilsTest" time="3.102"/>
-  <testcase name="testConvertInputStreamToString" classname="com.aboutcoder.packease.utils.io.PEInputStreamUtilsTest" time="0.008"/>
-  <testcase name="testConvertStringToInputStream" classname="com.aboutcoder.packease.utils.io.PEInputStreamUtilsTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.aboutcoder.packease.utils.io.PEOutputStreamUtilsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-05-25T10:37:43" hostname="Jeromes-MacBook-Pro.local" time="0.011">
-  <properties/>
-  <testcase name="testConvertStringToOutputStream" classname="com.aboutcoder.packease.utils.io.PEOutputStreamUtilsTest" time="0.007"/>
-  <testcase name="testConvertOutputStreamToString" classname="com.aboutcoder.packease.utils.io.PEOutputStreamUtilsTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
