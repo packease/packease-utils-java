@@ -1,7 +1,7 @@
 
 apply from: 'base/config.gradle'
 
-sourceCompatibility = 1.6
+// sourceCompatibility = 1.6
 
 subprojects {
     apply plugin: 'java'
