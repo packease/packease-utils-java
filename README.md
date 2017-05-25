@@ -9,19 +9,19 @@ P.E-Utils is a very powerful and useful collection of utility functions written 
 
 ## Catalogs & Tutorials
 
-* [PE.utils.annotation](src/main/java/com/aboutcoder/packease/utils/annotation/)
-* [PE.utils.constants](src/main/java/com/aboutcoder/packease/utils/constants/)
-* [PE.utils.date](src/main/java/com/aboutcoder/packease/utils/date/)
-* [PE.utils.db](src/main/java/com/aboutcoder/packease/utils/db/)
-* [PE.utils.excel](src/main/java/com/aboutcoder/packease/utils/excel/)
-* [PE.utils.io](src/main/java/com/aboutcoder/packease/utils/io/)
-* [PE.utils.jms](src/main/java/com/aboutcoder/packease/utils/jms/)
-* [PE.utils.json](src/main/java/com/aboutcoder/packease/utils/json/)
-* [PE.utils.redis](src/main/java/com/aboutcoder/packease/utils/redis/)
-* [PE.utils.string](src/main/java/com/aboutcoder/packease/utils/string/)
-* [PE.utils.thread](src/main/java/com/aboutcoder/packease/utils/thread/)
-* [PE.utils.togglz](src/main/java/com/aboutcoder/packease/utils/togglz/)
-* [PE.utils.xml](src/main/java/com/aboutcoder/packease/utils/xml/)
+* [PE.utils.annotation](utils/src/main/java/com/aboutcoder/packease/utils/annotation/)
+* [PE.utils.constants](utils/src/main/java/com/aboutcoder/packease/utils/constants/)
+* [PE.utils.date](utils/src/main/java/com/aboutcoder/packease/utils/date/)
+* [PE.utils.db](utils/src/main/java/com/aboutcoder/packease/utils/db/)
+* [PE.utils.excel](utils/src/main/java/com/aboutcoder/packease/utils/excel/)
+* [PE.utils.io](utils/src/main/java/com/aboutcoder/packease/utils/io/)
+* [PE.utils.jms](utils/src/main/java/com/aboutcoder/packease/utils/jms/)
+* [PE.utils.json](utils/src/main/java/com/aboutcoder/packease/utils/json/)
+* [PE.utils.redis](utils/src/main/java/com/aboutcoder/packease/utils/redis/)
+* [PE.utils.string](utils/src/main/java/com/aboutcoder/packease/utils/string/)
+* [PE.utils.thread](utils/src/main/java/com/aboutcoder/packease/utils/thread/)
+* [PE.utils.togglz](utils/src/main/java/com/aboutcoder/packease/utils/togglz/)
+* [PE.utils.xml](utils/src/main/java/com/aboutcoder/packease/utils/xml/)
 
 ## Development
 
