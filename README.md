@@ -1,6 +1,7 @@
 Packease-Utils
 ==================
 
+[![Actively Maintained](https://maintained.tech/badge.svg)](https://maintained.tech/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a356c3a08474a18966c221acd1bafaf)](https://www.codacy.com/app/jerome.chan369/packease-utils-java?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=packease/packease-utils-java&amp;utm_campaign=Badge_Grade)
 
 ## About P.E-Utils
